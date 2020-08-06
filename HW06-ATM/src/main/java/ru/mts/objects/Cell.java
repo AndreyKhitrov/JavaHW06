@@ -1,46 +1,39 @@
 package ru.mts.objects;
 
-public class Cell {
+import ru.mts.exception.NotCountException;
+
+public class Cell implements CellInterface {
     private int nominal;
-    private final int count_Max = 100000;
+    private final int COUNT_MAX = 1000 ;
     private int count;
 
-    public Cell(int nominal){
-        this.nominal=nominal;
-        this.count=count_Max;
+    public Cell(int nominal) {
+        this.nominal =  nominal;
+        this.count = COUNT_MAX;
     }
-
-    public Cell(int nominal, int count){
-        this.nominal=nominal;
-        this.count=count;
-    }
-
-    public int getNominal() {
-        return nominal;
-    }
-
-    public int getCount() {
-            return count;
-    }
-
-    public void setCount(int count) {
+    public Cell(int nominal, int count) {
+        this.nominal = nominal;
         this.count = count;
     }
-
-    public int getCount_Max() {
-        return count_Max;
-    }
-
-    public void setCount_Max(){
-        this.count=count_Max;
-    }
-
-    public long getAmount() {
-        return (long) count*nominal;
-    }
+    @Override
+    public int getNominal() {        return nominal;    }
+    @Override
+    public int getCount() {        return count;    }
+    @Override
+    public void setCount(int count) throws Exception {
+        if (count < 0||count> COUNT_MAX)
+        { throw new NotCountException( "Count error " + count);}
+        this.count = count;    }
+    @Override
+    public void setCountMax() {        this.count = COUNT_MAX;    }
+    @Override
+    public int getCount_Max() { return COUNT_MAX;    }
 
     @Override
-    public String toString(){
-        return  "Cell{"+ "nominal = "+ nominal+", count = " + count + ", amount = " + nominal*count + "}";
+    public String toString() {
+        return "Cell{" + "nominal = " + nominal + ", count = " + count + ", amount = " + nominal*count + '}';
     }
+
+
 }
+
