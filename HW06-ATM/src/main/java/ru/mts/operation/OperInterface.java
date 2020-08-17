@@ -1,7 +1,7 @@
 package ru.mts.operation;
 
-import ru.mts.objects.ATMInterface;
+import ru.mts.objects.ATM;
 
 public interface OperInterface {
-    public ATMInterface action (ATMInterface atm) throws Exception;
+    public ATM action (ATM atm) throws Exception;
 }
